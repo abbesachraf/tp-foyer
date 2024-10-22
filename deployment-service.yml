@@ -1,0 +1,7 @@
+version: '3'  # Version of the Docker Compose file format
+
+services:
+  tpfoyer:  # Service name
+    image: adminaymen/tpfoyer:latest  # Docker image to use
+    ports:
+      - "8082:8082"  # Map port 8082 of the container to port 8082 on the host
