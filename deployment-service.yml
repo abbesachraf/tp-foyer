@@ -1,7 +1,34 @@
-version: '3'  # Version of the Docker Compose file format
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tpfoyer-deployment
+spec:
+  selector:
+    matchLabels:
+      app: tpfoyer
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: tpfoyer
+    spec:
+      containers:
+        - name: tpfoyer
+          image: adminaymen/tpfoyer:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
 
-services:
-  tpfoyer:  # Service name
-    image: adminaymen/tpfoyer:latest  # Docker image to use
-    ports:
-      - "8082:8082"  # Map port 8082 of the container to port 8082 on the host
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tpfoyer-ssvc
+spec:
+  selector:
+    app: tpfoyer
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8082
