@@ -34,7 +34,7 @@ public class ChambreServiceImplTest {
         chambre = new Chambre();
         chambre.setIdChambre(1L);
         chambre.setNumeroChambre(101L);
-        chambre.setTypeC(TypeChambre.SINGLE); // Assuming TypeChambre is an enum
+        chambre.setTypeC(TypeChambre.SIMPLE); // Assuming TypeChambre is an enum
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ChambreServiceImplTest {
         // Assert that the Chambre is not null and values are correct
         assertNotNull(retrievedChambre);
         assertEquals(101L, retrievedChambre.getNumeroChambre());
-        assertEquals(TypeChambre.SINGLE, retrievedChambre.getTypeC());
+        assertEquals(TypeChambre.SIMPLE, retrievedChambre.getTypeC());
     }
 
     @Test
