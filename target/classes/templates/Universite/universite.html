@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Foyer Management</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+  <style>
+    h1, h2, a {
+      color: #ff0000;
+      text-align: center;
+    }
+
+    a {
+      color: #ff0000;
+      text-align: left;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 50%;  /* Optional: to control table width */
+      margin: 0 auto;
+    }
+
+    table th, table td {
+      padding: 10px;
+      text-align: center; /* Optional: for better alignment */
+      border: 1px solid #ddd; /* Optional: to add a border around table cells */
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="main">
+  <div class="navbar">
+    <div class="icon">
+      <h2 class="logo">Foyer</h2>
+    </div>
+
+    <div class="menu">
+      <ul>
+        <li><a th:href="@{/}">HOME</a></li>
+        <li><a th:href="@{/universite}">University</a></li>
+        <li><a th:href="@{/foyer}">Foyer</a></li>
+        <li><a th:href="@{/chambre}">Chambre</a></li>
+        <li><a th:href="@{/bloc}">Bloc</a></li>
+        <li><a th:href="@{/etudiant}">Student</a></li>
+        <li><a th:href="@{reservation}">Reservation</a></li>
+      </ul>
+    </div>
+
+    <div class="search">
+      <input class="srch" type="search" name="" placeholder="Type To Search">
+      <a href="#"> <button class="btn">Search</button></a>
+    </div>
+
+  </div>
+  <div class="container-fluid text-center">
+    <div><h2>Manage Universite</h2></div>
+    <br/>
+    <div class="m-2">
+      <a th:href="@{/users/new}">Add New University</a>
+    </div>
+    <!-- Table of Universities -->
+    <div>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Foyer ID</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="universite : ${listUniversite}">
+          <tr>
+            <td>[[${universite.idUniversite}]]</td>
+            <td>[[${universite.nomUniversite}]]</td>
+            <td>[[${universite.adresse}]]</td>
+            <td>[[${universite.foyer.idFoyer}]]</td>
+            <td>
+              <a th:href="@{'/universite/' + ${universite.idUniversite} + '/edit'}">Edit</a> |
+              <a th:href="@{'/universite/' + ${universite.idUniversite} + '/delete'}">Delete</a>
+            </td>
+          </tr>
+        </th:block>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
+</html>

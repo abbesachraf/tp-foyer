@@ -3,6 +3,7 @@ package tn.esprit.tpfoyer.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.repository.UniversiteRepository;
 
@@ -29,8 +30,8 @@ public class UniversiteServiceImpl implements IUniversiteService {
     public Universite modifyUniversite(Universite universite) {
         return universiteRepository.save(universite);
     }
-
     public void removeUniversite(Long universiteId) {
         universiteRepository.deleteById(universiteId);
     }
+
 }

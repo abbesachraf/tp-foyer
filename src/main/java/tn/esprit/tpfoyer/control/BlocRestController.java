@@ -4,21 +4,31 @@ package tn.esprit.tpfoyer.control;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tn.esprit.tpfoyer.entity.Bloc;
+import tn.esprit.tpfoyer.entity.Chambre;
 import tn.esprit.tpfoyer.service.IBlocService;
 
 import java.util.List;
 
-@Tag(name = "Gestion Bloc pour l'équipe 4DS9")
-@RestController
-@AllArgsConstructor
-@RequestMapping("/bloc")
+@Controller
 public class BlocRestController {
 
+    @Autowired
     IBlocService blocService;
 
 
+    @GetMapping("/bloc")
+    public String showBlocList(Model model) {
+        List<Bloc> listBloc = blocService.retrieveAllBlocs();
+        model.addAttribute("listBloc", listBloc);
+
+        return "Bloc/bloc";
+    }
     //http://localhost:8089/tpfoyer/bloc/retrieve-all-blocs
 
     @GetMapping("/retrieve-all-blocs")
@@ -36,6 +46,7 @@ public class BlocRestController {
         return bloc;
 
     }
+
 
     // http://localhost:8089/tpfoyer/bloc/add-bloc
     @PostMapping("/add-bloc")

@@ -1,33 +1,29 @@
 package tn.esprit.tpfoyer.control;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Chambre;
 import tn.esprit.tpfoyer.entity.TypeChambre;
 import tn.esprit.tpfoyer.service.IChambreService;
 import java.util.List;
+import org.springframework.ui.Model;
 
 
-@RestController
-@AllArgsConstructor
-@RequestMapping("/chambre")
+@Controller
 public class ChambreRestController {
-
+    @Autowired
     IChambreService chambreService;
 
 // http://localhost:8089/tpfoyer/chambre/retrieve-all-chambres
-     @GetMapping("/retrieve-all-chambres")
-    public List<Chambre> getChambres() {
-        List<Chambre> listChambres = chambreService.retrieveAllChambres();
-        return listChambres;
-    }
+    @GetMapping("/chambre")
+    public String showChambreList(Model model) {
+        List<Chambre> listChambre = chambreService.listAll();
+        model.addAttribute("listChambre", listChambre);
 
-
-
-    @GetMapping("/retrieve-chambre/{chambre-id}")
-    public Chambre retrieveChambre(@PathVariable("chambre-id") Long chId) {
-        Chambre chambre = chambreService.retrieveChambre(chId);
-        return chambre;
+        return "Chambre/chambre";
     }
 
     // http://localhost:8089/tpfoyer/chambre/add-chambre
@@ -56,22 +52,6 @@ public class ChambreRestController {
     {
         return chambreService.recupererChambresSelonTyp(tc);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // http://localhost:8089/tpfoyer/chambre/retrieve-chambre/8
     @GetMapping("/trouver-chambre-selon-etudiant/{cin}")

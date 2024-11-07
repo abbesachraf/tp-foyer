@@ -1,18 +1,28 @@
 package tn.esprit.tpfoyer.control;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tpfoyer.entity.Foyer;
 import tn.esprit.tpfoyer.service.IFoyerService;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
-@RestController
-@AllArgsConstructor
-@RequestMapping("/foyer")
+@Controller
 public class FoyerRestController {
 
+    @Autowired
     IFoyerService foyerService;
+
+    @GetMapping("/foyer")
+    public String showFoyerList(Model model) {
+        List<Foyer> listFoyer = foyerService.retrieveAllFoyers();
+        model.addAttribute("listFoyer", listFoyer);
+
+        return "Foyer/foyer";
+    }
+
 
     // http://localhost:8089/tpfoyer/foyer/retrieve-all-foyers
     @GetMapping("/retrieve-all-foyers")

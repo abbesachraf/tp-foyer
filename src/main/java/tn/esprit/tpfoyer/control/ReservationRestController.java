@@ -1,7 +1,10 @@
 package tn.esprit.tpfoyer.control;
 
-import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tpfoyer.entity.Reservation;
 import tn.esprit.tpfoyer.service.IReservationService;
@@ -9,12 +12,19 @@ import tn.esprit.tpfoyer.service.IReservationService;
 import java.util.Date;
 import java.util.List;
 
-@RestController
-@AllArgsConstructor
-@RequestMapping("/reservation")
+@Controller
 public class ReservationRestController {
 
+    @Autowired
     IReservationService reservationService;
+
+    @GetMapping("/reservation")
+    public String showReservationList(Model model) {
+        List<Reservation> listReservation = reservationService.retrieveAllReservations();
+        model.addAttribute("listReservation", listReservation);
+
+        return "Reservation/reservation";
+    }
 
     // http://localhost:8089/tpfoyer/reservation/retrieve-all-reservations
     @GetMapping("/retrieve-all-reservations")
@@ -30,25 +40,11 @@ public class ReservationRestController {
     }
 
 
-
-
-
-
-
     @GetMapping("/retrieve-reservation-date-status/{d}/{v}")
     public List<Reservation> retrieveReservationParDateEtStatus
             (@PathVariable("d") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date d, @PathVariable("v") boolean b) {
         return reservationService.trouverResSelonDateEtStatus(d, b);
     }
-
-
-
-
-
-
-
-
-
 
 
     // http://localhost:8089/tpfoyer/reservation/add-reservation

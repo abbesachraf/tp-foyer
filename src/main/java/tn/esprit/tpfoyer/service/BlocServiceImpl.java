@@ -78,4 +78,5 @@ public class BlocServiceImpl  implements IBlocService {
         return blocRepository.findAllByNomBlocAndCapaciteBloc(nb,  c);
     }
 
+
 }

@@ -3,6 +3,7 @@ package tn.esprit.tpfoyer.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Foyer;
 import tn.esprit.tpfoyer.repository.FoyerRepository;
 
@@ -25,8 +26,8 @@ public class FoyerServiceImpl implements IFoyerService {
     public Foyer modifyFoyer(Foyer foyer) {
         return foyerRepository.save(foyer);
     }
-
     public void removeFoyer(Long foyerId) {
         foyerRepository.deleteById(foyerId);
     }
+
 }

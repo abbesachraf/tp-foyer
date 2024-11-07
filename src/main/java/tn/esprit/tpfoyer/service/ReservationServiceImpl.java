@@ -3,6 +3,7 @@ package tn.esprit.tpfoyer.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Reservation;
 import tn.esprit.tpfoyer.repository.ReservationRepository;
 
@@ -34,8 +35,9 @@ public class ReservationServiceImpl implements IReservationService {
     public List<Reservation> trouverResSelonDateEtStatus(Date d, boolean b) {
         return reservationRepository.findAllByAnneeUniversitaireBeforeAndEstValide(d, b);
     }
-
     public void removeReservation(String reservationId) {
         reservationRepository.deleteById(reservationId);
     }
+
+
 }

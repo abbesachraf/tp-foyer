@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer.service;
 
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Universite;
 
 import java.util.List;
@@ -13,5 +14,6 @@ public interface IUniversiteService {
     public Universite modifyUniversite(Universite universite);
 
     // Here we will add later methods calling keywords and methods calling JPQL
+
 
 }

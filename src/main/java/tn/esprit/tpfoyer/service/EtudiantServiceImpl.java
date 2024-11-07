@@ -3,6 +3,7 @@ package tn.esprit.tpfoyer.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.repository.EtudiantRepository;
 
@@ -34,7 +35,6 @@ public class EtudiantServiceImpl implements IEtudiantService {
     {
         return etudiantRepository.findEtudiantByCinEtudiant(cin);
     }
-
 
 
 }

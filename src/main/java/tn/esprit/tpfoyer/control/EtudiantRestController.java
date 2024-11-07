@@ -1,37 +1,37 @@
 package tn.esprit.tpfoyer.control;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.service.IEtudiantService;
 
 import java.util.List;
 
 
-@RestController
-@AllArgsConstructor
-@RequestMapping("/etudiant")
+@Controller
 public class EtudiantRestController {
 
+    @Autowired
     IEtudiantService etudiantService;
 
+
+    @GetMapping("/etudiant")
+    public String showEtudiantList(Model model) {
+        List<Etudiant> listEtudiant = etudiantService.retrieveAllEtudiants();
+        model.addAttribute("listEtudiant", listEtudiant);
+
+        return "Etudiant/etudiant";
+    }
 
     @GetMapping("/retrieve-all-etudiants")
     public List<Etudiant> getEtudiants() {
         List<Etudiant> listEtudiants = etudiantService.retrieveAllEtudiants();
         return listEtudiants;
     }
-
-
-
-
-
-
-
-
-
-
-
 
     @GetMapping("/retrieve-etudiant-cin/{cin}")
     public Etudiant retrieveEtudiantParCin(@PathVariable("cin") Long cin) {

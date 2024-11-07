@@ -1,18 +1,29 @@
 package tn.esprit.tpfoyer.control;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.service.IUniversiteService;
 
 import java.util.List;
 
-@RestController
-@AllArgsConstructor
-@RequestMapping("/universite")
+@Controller
 public class UniversiteRestController {
 
+    @Autowired
     IUniversiteService universiteService;
+
+    @GetMapping("/universite")
+    public String showUniversiteList(Model model) {
+        List<Universite> listUniversite = universiteService.retrieveAllUniversites();
+        model.addAttribute("listUniversite", listUniversite);
+
+        return "Universite/universite";
+    }
 
     // http://localhost:8089/tpfoyer/universite/retrieve-all-universites
     @GetMapping("/retrieve-all-universites")
