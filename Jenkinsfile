@@ -44,7 +44,7 @@ pipeline {
             type: 'jar']], 
            credentialsId: 'Nexus', 
            groupId: 'org.springframework.boot', 
-           nexusUrl: '192.168.252.129:8081', 
+           nexusUrl: '192.168.137.131:8081', 
            nexusVersion: 'nexus3', 
            protocol: 'http', 
            repository: 'maven-releases', 
