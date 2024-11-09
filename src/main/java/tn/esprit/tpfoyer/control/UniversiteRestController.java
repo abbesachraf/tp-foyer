@@ -50,7 +50,7 @@ public class UniversiteRestController {
         Universite universite = universiteService.retrieveUniversite(idUniversite);
         model.addAttribute("universite", universite);
 
-        return "/Universite/edit";
+        return "Universite/edit";
     }
 
     // Handle the form submission for updating a Chambre
