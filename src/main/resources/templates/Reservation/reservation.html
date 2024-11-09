@@ -149,7 +149,7 @@
     <div class="container-fluid text-center">
         <h2>Manage Reservations</h2>
         <div class="d-flex justify-content-start mb-3">
-            <a class="btn btn-success" th:href="@{/users/new}">Add New Reservation</a>
+            <a class="btn btn-success" th:href="@{/reservation/add}">Add New Reservation</a>
         </div>
         <!-- Table of Reservations -->
         <div class="table-responsive">
@@ -169,9 +169,11 @@
                         <td>[[${reservation.anneeUniversitaire}]]</td>
                         <td>[[${reservation.estValide}]]</td>
                         <td>
-                            <a class="btn btn-primary btn-sm"th:href="@{'/reservation/' + ${reservation.idReservation} + '/edit'}">Edit</a> |
-                            <a class="btn btn-danger btn-sm" th:href="@{'/reservation/' + ${reservation.idReservation} + '/delete'}">Delete</a>
-                        </td>
+                            <a class="btn btn-primary btn-sm"th:href="@{'/reservation/edit/' + ${reservation.idReservation}}">Edit</a> |
+                            <a th:href="@{'/reservation/delete/' + ${reservation.idReservation}}"
+             class="btn btn-danger btn-sm"
+             th:onclick="|return confirm('Are you sure you want to delete Universite ID ' + ${reservation.idReservation} + '?');|">Delete</a>
+        </td>
                     </tr>
                 </th:block>
                 </tbody>
@@ -183,3 +185,4 @@
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 </html>
+
