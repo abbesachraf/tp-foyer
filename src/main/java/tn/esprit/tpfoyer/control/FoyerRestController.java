@@ -28,13 +28,13 @@ public class FoyerRestController {
     public String retrieveFoyer(@PathVariable("foyer-id") Long idFoyer, Model model) {
         Foyer foyer = foyerService.retrieveFoyer(idFoyer);
         model.addAttribute("foyer", foyer);
-        return "foyer/detail";
+        return "Foyer/detail";
     }
 
     @GetMapping("/foyer/add")
     public String showNewForm(Model model) {
         model.addAttribute("foyer", new Foyer());
-        return "/foyer/add";
+        return "Foyer/add";
     }
 
     @PostMapping("/foyer/save")
@@ -50,7 +50,7 @@ public class FoyerRestController {
         Foyer foyer = foyerService.retrieveFoyer(idFoyer);
         model.addAttribute("foyer", foyer);
 
-        return "/Foyer/edit";
+        return "Foyer/edit";
     }
 
     // Handle the form submission for updating a Chambre
