@@ -63,7 +63,7 @@ pipeline {
             steps{
                 script{
                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u zemzishere -p ${dockerhubpwd}'
+                   sh 'docker login -u maryeeem -p ${dockerhubpwd}'
 
 }
                    sh 'docker push maryeeem/tp-foyer'
