@@ -26,6 +26,75 @@ public class ReservationRestController {
         return "Reservation/reservation";
     }
 
+
+
+
+    @GetMapping("/reservation/{reservation-id}")
+    public String retrieveReservation(@PathVariable("reservation-id") String idReservation, Model model) {
+        Reservation reservation = reservationService.retrieveReservation(idReservation);
+        model.addAttribute("reservation", reservation);
+        return "Reservation/detail";
+    }
+
+    @GetMapping("/reservation/add")
+    public String showNewForm(Model model) {
+        model.addAttribute("reservation", new Reservation());
+        return "Reservation/add";
+    }
+
+    @PostMapping("/reservation/save")
+    public String saveReservation(Reservation reservation) {
+        reservationService.save(reservation);
+        return "redirect:/reservation";
+    }
+
+
+    @GetMapping("/reservation/edit/{id}")
+    public String showEditForm(@PathVariable("id") String  idReservation, Model model) {
+        Reservation reservation = reservationService.retrieveReservation(idReservation);
+        model.addAttribute("reservation", reservation);
+
+        return "Reservation/edit";
+    }
+
+    // Handle the form submission for updating a Reservation
+    @PostMapping("/reservation/edit/{id}")
+    public String updateReservation(@PathVariable("id") String  idReservation, @ModelAttribute("reservation") Reservation reservation) {
+        reservation.setIdReservation(idReservation); // Ensure the correct ID is set
+        reservationService.save(reservation); // Assuming there's a save method that updates if the ID exists
+        return "redirect:/reservation"; // Redirect to the list or details page
+    }
+
+    @GetMapping("/reservation/delete/{reservation-id}")
+        public String deleteReservation(@PathVariable("reservation-id") String idReservation) {
+        reservationService.removeReservation(idReservation);
+        return "redirect:/reservation";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // http://localhost:8089/tpfoyer/reservation/retrieve-all-reservations
     @GetMapping("/retrieve-all-reservations")
     public List<Reservation> getReservations() {
