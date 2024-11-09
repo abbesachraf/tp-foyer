@@ -29,13 +29,13 @@ public class UniversiteRestController {
     public String retrieveUniversite(@PathVariable("universite-id") Long idUniversite, Model model) {
         Universite universite = universiteService.retrieveUniversite(idUniversite);
         model.addAttribute("universite", universite);
-        return "universite/detail";
+        return "Universite/detail";
     }
 
     @GetMapping("/universite/add")
     public String showNewForm(Model model) {
         model.addAttribute("universite", new Universite());
-        return "universite/add";
+        return "Universite/add";
     }
 
     @PostMapping("/universite/save")
