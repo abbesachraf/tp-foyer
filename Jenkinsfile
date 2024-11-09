@@ -32,7 +32,7 @@ pipeline {
          withSonarQubeEnv('Sonarqube1') {
          sh "mvn sonar:sonar \
          -Dsonar.projectKey=tpfoyer \
-         -Dsonar.host.url=http://192.168.33.10:9000"
+         -Dsonar.host.url=http://192.168.137.131:9000"
 }
 }
 }
