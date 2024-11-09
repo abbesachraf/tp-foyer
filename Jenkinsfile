@@ -55,7 +55,7 @@ pipeline {
             stage('Docker Image'){
             steps{
                 script{
-                    sh 'docker build -t zemzishere/tp-foyer .'
+                    sh 'docker build -t maryeeem/tp-foyer .'
                 }
             }
         }
@@ -66,7 +66,7 @@ pipeline {
                    sh 'docker login -u zemzishere -p ${dockerhubpwd}'
 
 }
-                   sh 'docker push zemzishere/tp-foyer'
+                   sh 'docker push maryeeem/tp-foyer'
                 }
             }
         }
