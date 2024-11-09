@@ -35,13 +35,12 @@ public class UniversiteRestController {
     @GetMapping("/universite/add")
     public String showNewForm(Model model) {
         model.addAttribute("universite", new Universite());
-        return "/universite/add";
+        return "redirect:/add";
     }
 
     @PostMapping("/universite/save")
-    public String saveUniversite(Universite universite, RedirectAttributes ra) {
+    public String saveUniversite(Universite universite) {
         universiteService.save(universite);
-        ra.addFlashAttribute("message", "The user has been saved successfully.");
         return "redirect:/universite";
     }
 
