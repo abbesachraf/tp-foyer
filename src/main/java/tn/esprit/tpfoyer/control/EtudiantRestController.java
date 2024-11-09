@@ -30,13 +30,13 @@ public class EtudiantRestController {
     public String retrieveEtudiant(@PathVariable("etudiant-id") Long idEtudiant, Model model) {
         Etudiant etudiant = etudiantService.retrieveEtudiant(idEtudiant);
         model.addAttribute("etudiant", etudiant);
-        return "etudiant/detail";
+        return "Etudiant/detail";
     }
 
     @GetMapping("/etudiant/add")
     public String showNewForm(Model model) {
         model.addAttribute("etudiant", new Etudiant());
-        return "/etudiant/add";
+        return "Etudiant/add";
     }
 
     @PostMapping("/etudiant/save")
@@ -52,7 +52,7 @@ public class EtudiantRestController {
         Etudiant etudiant = etudiantService.retrieveEtudiant(idEtudiant);
         model.addAttribute("etudiant", etudiant);
 
-        return "/Etudiant/edit";
+        return "Etudiant/edit";
     }
 
     // Handle the form submission for updating a Chambre
