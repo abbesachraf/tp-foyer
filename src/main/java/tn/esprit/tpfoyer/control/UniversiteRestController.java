@@ -35,7 +35,7 @@ public class UniversiteRestController {
     @GetMapping("/universite/add")
     public String showNewForm(Model model) {
         model.addAttribute("universite", new Universite());
-        return "redirect:/add";
+        return "universite/add";
     }
 
     @PostMapping("/universite/save")
