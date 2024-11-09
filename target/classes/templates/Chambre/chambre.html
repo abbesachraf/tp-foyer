@@ -2,92 +2,184 @@
 <html lang="en">
 <head>
     <title>Foyer Management</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
     <style>
-        h1, h2, a {
-            color: #ff0000;
-            text-align: center;
+        /* Custom Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
 
-        a {
-            color: #ff0000;
-            text-align: left;
+        h1, h2 {
+            color: #007bff;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .navbar {
+            background-color: #c82333;
+            padding: 5px;
+        }
+
+        .navbar .logo {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .search {
+            display: flex;
+            justify-content: right;
+            margin-top: 10px;
+        }
+
+        .search input[type="search"] {
+            padding: 5px;
+            border-radius: 5px 0 0 5px;
+            border: 1px solid #ced4da;
+            width: 250px;
+        }
+
+        .search button {
+            border: none;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .search button:hover {
+            background-color: #0056b3;
+        }
+
+        .container-fluid {
+            padding: 20px;
         }
 
         table {
-            border-collapse: collapse;
-            width: 50%;  /* Optional: to control table width */
+            width: 80%;
             margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         table th, table td {
-            padding: 10px;
-            text-align: center; /* Optional: for better alignment */
-            border: 1px solid #ddd; /* Optional: to add a border around table cells */
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
         }
 
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .m-2 {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
-<div class="main">
-    <div class="navbar">
-        <div class="icon">
-            <h2 class="logo">Foyer</h2>
-        </div>
-
-        <div class="menu">
-            <ul>
-                <li><a th:href="@{/}">HOME</a></li>
-                <li><a th:href="@{/universite}">University</a></li>
-                <li><a th:href="@{/foyer}">Foyer</a></li>
-                <li><a th:href="@{/chambre}">Chambre</a></li>
-                <li><a th:href="@{/bloc}">Bloc</a></li>
-                <li><a th:href="@{/etudiant}">Student</a></li>
-                <li><a th:href="@{reservation}">Reservation</a></li>
-            </ul>
-        </div>
-
-        <div class="search">
-            <input class="srch" type="search" name="" placeholder="Type To Search">
-            <a href="#"> <button class="btn">Search</button></a>
-        </div>
-
+<!-- Navbar Section -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <div class="navbar-brand logo">Foyer</div>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/universite}">University</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/foyer}">Foyer</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/chambre}">Chambre</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/bloc}">Bloc</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/etudiant}">Student</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/reservation}">Reservation</a></li>
+        </ul>
     </div>
-    <div class="container-fluid text-center">
-        <div><h2>Manage Chambres</h2></div>
-        <br/>
-        <div class="m-2">
-            <a th:href="@{/users/new}">Add New Chambre</a>
-        </div>
-            <!-- Table of chambres -->
-            <div>
-                <table>
-                    <thead>
+</nav>
+
+<!-- Search Section -->
+<div class="search mt-3">
+    <input class="form-control" type="search" name="" placeholder="Type To Search">
+    <button class="btn btn-primary">Search</button>
+</div>
+
+<div class="container-fluid text-center">
+    <h2>Manage Chambres</h2>
+    <div class="d-flex justify-content-start mb-3">
+        <a class="btn btn-success" th:href="@{/chambre/add}">Add New Chambre</a>
+    </div>
+
+        <!-- Table of Chambres -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Room Number</th>
+                    <th>Type</th>
+                    <th>Bloc</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="chambre : ${listChambre}">
                     <tr>
-                        <th>ID</th>
-                        <th>Room Number</th>
-                        <th>Type</th>
-                        <th>Bloc</th>
-                        <th>Actions</th>
+                        <td><a th:href="@{'/chambre/' + ${chambre.idChambre}}" class="text-decoration-none">[[${chambre.idChambre}]]</a></td>
+                        <td>[[${chambre.numeroChambre}]]</td>
+                        <td>[[${chambre.typeC}]]</td>
+                        <td>[[${chambre.bloc.idBloc}]]</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" th:href="@{'/chambre/edit/' + ${chambre.idChambre}}">Edit</a> |
+                            <a th:href="@{'/chambre/delete/' + ${chambre.idChambre}}"
+                            class="btn btn-danger btn-sm"
+                               th:onclick="|return confirm('Are you sure you want to delete Bloc ID ' + ${chambre.idChambre} + '?');|">Delete</a>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <th:block th:each="chambre : ${listChambre}">
-                        <tr>
-                            <td>[[${chambre.idChambre}]]</td>
-                            <td>[[${chambre.numeroChambre}]]</td>
-                            <td>[[${chambre.typeC}]]</td>
-                            <td>[[${chambre.bloc.idBloc}]]</td>
-                            <td>
-                                <a class="h4 mr-3" th:href="@{'/chambre' + ${chambre.idChambre}}">Edit</a>
-                                <a class="h4" th:href="@{'/chambre' + ${chambre.idChambre}}">Delete</a>
-                            </td>
-                        </tr>
-                    </th:block>
-                    </tbody>
-                </table>
-            </div>
+                </th:block>
+                </tbody>
+            </table>
         </div>
     </div>
 

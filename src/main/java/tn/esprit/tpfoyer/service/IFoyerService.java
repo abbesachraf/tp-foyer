@@ -13,4 +13,5 @@ public interface IFoyerService {
     public void removeFoyer(Long foyerId);
     public Foyer modifyFoyer(Foyer foyer);
 
+    public void save(Foyer foyer);
 }

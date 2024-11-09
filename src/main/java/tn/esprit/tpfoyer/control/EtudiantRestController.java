@@ -1,11 +1,11 @@
 package tn.esprit.tpfoyer.control;
 
-import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.tpfoyer.entity.Bloc;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.service.IEtudiantService;
 
@@ -26,6 +26,76 @@ public class EtudiantRestController {
 
         return "Etudiant/etudiant";
     }
+    @GetMapping("/etudiant/{etudiant-id}")
+    public String retrieveEtudiant(@PathVariable("etudiant-id") Long idEtudiant, Model model) {
+        Etudiant etudiant = etudiantService.retrieveEtudiant(idEtudiant);
+        model.addAttribute("etudiant", etudiant);
+        return "etudiant/detail";
+    }
+
+    @GetMapping("/etudiant/add")
+    public String showNewForm(Model model) {
+        model.addAttribute("etudiant", new Etudiant());
+        return "/etudiant/add";
+    }
+
+    @PostMapping("/etudiant/save")
+    public String saveEtudiant(Etudiant etudiant, RedirectAttributes ra) {
+        etudiantService.save(etudiant);
+        ra.addFlashAttribute("message", "The user has been saved successfully.");
+        return "redirect:/etudiant";
+    }
+
+
+    @GetMapping("/etudiant/edit/{id}")
+    public String showEditForm(@PathVariable("id") Long idEtudiant, Model model) {
+        Etudiant etudiant = etudiantService.retrieveEtudiant(idEtudiant);
+        model.addAttribute("etudiant", etudiant);
+
+        return "/Etudiant/edit";
+    }
+
+    // Handle the form submission for updating a Chambre
+    @PostMapping("/etudiant/edit/{id}")
+    public String updateEtudiant(@PathVariable("id") Long idEtudiant, @ModelAttribute("etudiant") Etudiant etudiant) {
+        etudiant.setIdEtudiant(idEtudiant);
+        etudiantService.save(etudiant);
+        return "redirect:/etudiant";
+    }
+
+    @GetMapping("/etudiant/delete/{etudiant-id}")
+    public String deleteEtudiant(@PathVariable("etudiant-id") Long idEtudiant) {
+        etudiantService.removeEtudiant(idEtudiant);
+        return "redirect:/etudiant";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/retrieve-all-etudiants")
     public List<Etudiant> getEtudiants() {

@@ -31,7 +31,7 @@ public class Chambre {
     @OneToMany
     Set<Reservation> reservations;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     Bloc bloc;
 
 }

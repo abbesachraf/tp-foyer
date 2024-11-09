@@ -9,6 +9,8 @@ import java.util.List;
 public interface IChambreService {
 
     public List<Chambre> listAll();
+
+    public Chambre retrieveChambre(Long idChambre);
     public Chambre addChambre(Chambre c);
     public void removeChambre(Long chambreId);
     public Chambre modifyChambre(Chambre chambre);
@@ -18,5 +20,5 @@ public interface IChambreService {
 
     public List<Chambre> recupererChambresSelonTyp(TypeChambre tc);
 
-
+    public void save(Chambre chambre);
 }

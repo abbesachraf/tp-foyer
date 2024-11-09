@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.tpfoyer.entity.Etudiant;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.service.IUniversiteService;
 
@@ -24,6 +24,76 @@ public class UniversiteRestController {
 
         return "Universite/universite";
     }
+
+    @GetMapping("/universite/{universite-id}")
+    public String retrieveUniversite(@PathVariable("universite-id") Long idUniversite, Model model) {
+        Universite universite = universiteService.retrieveUniversite(idUniversite);
+        model.addAttribute("universite", universite);
+        return "universite/detail";
+    }
+
+    @GetMapping("/universite/add")
+    public String showNewForm(Model model) {
+        model.addAttribute("universite", new Universite());
+        return "/universite/add";
+    }
+
+    @PostMapping("/universite/save")
+    public String saveUniversite(Universite universite, RedirectAttributes ra) {
+        universiteService.save(universite);
+        ra.addFlashAttribute("message", "The user has been saved successfully.");
+        return "redirect:/universite";
+    }
+
+
+    @GetMapping("/universite/edit/{id}")
+    public String showEditForm(@PathVariable("id") Long idUniversite, Model model) {
+        Universite universite = universiteService.retrieveUniversite(idUniversite);
+        model.addAttribute("universite", universite);
+
+        return "/Universite/edit";
+    }
+
+    // Handle the form submission for updating a Chambre
+    @PostMapping("/universite/edit/{id}")
+    public String updateUniversite(@PathVariable("id") Long idUniversite, @ModelAttribute("universite") Universite universite) {
+        universite.setIdUniversite(idUniversite);
+        universiteService.save(universite);
+        return "redirect:/universite";
+    }
+
+    @GetMapping("/universite/delete/{universite-id}")
+    public String deleteUniversite(@PathVariable("universite-id") Long idUniversite) {
+        universiteService.removeUniversite(idUniversite);
+        return "redirect:/universite";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // http://localhost:8089/tpfoyer/universite/retrieve-all-universites
     @GetMapping("/retrieve-all-universites")

@@ -36,5 +36,8 @@ public class EtudiantServiceImpl implements IEtudiantService {
         return etudiantRepository.findEtudiantByCinEtudiant(cin);
     }
 
+    public void save(Etudiant etudiant) {
+        etudiantRepository.save(etudiant);
+    }
 
 }

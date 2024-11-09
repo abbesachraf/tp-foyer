@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create/Edit Foyer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h2 {
+            color: #343a40;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create new Foyer</h2>
+    <form th:action="@{/foyer/save}" method="post" th:object="${foyer}">
+        <input type="hidden" th:field="*{idFoyer}">
+
+        <!-- Name Field -->
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{nomFoyer}" id="name" class="form-control" placeholder="Enter foyer name" required />
+        </div>
+
+        <!-- Capacity Field -->
+        <div class="form-group">
+            <label for="capacity">Capacity:</label>
+            <input type="number" th:field="*{capaciteFoyer}" id="capacity" class="form-control" placeholder="Enter capacity" required min="1" />
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary m-2">Save</button>
+            <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function cancelForm() {
+        window.location = "[[@{/foyer}]]";
+    }
+</script>
+
+</body>
+</html>

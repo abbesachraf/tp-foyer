@@ -15,5 +15,6 @@ public interface IUniversiteService {
 
     // Here we will add later methods calling keywords and methods calling JPQL
 
+    public void save(Universite universite);
 
 }

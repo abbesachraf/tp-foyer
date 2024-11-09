@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Chambre;
 import tn.esprit.tpfoyer.entity.TypeChambre;
 import tn.esprit.tpfoyer.service.IChambreService;
@@ -25,6 +24,80 @@ public class ChambreRestController {
 
         return "Chambre/chambre";
     }
+
+
+
+    @GetMapping("/chambre/{chambre-id}")
+    public String retrieveChambre(@PathVariable("chambre-id") Long idChambre, Model model) {
+        Chambre chambre = chambreService.retrieveChambre(idChambre);
+        model.addAttribute("chambre", chambre);
+        return "Chambre/detail";
+    }
+
+    @GetMapping("/chambre/add")
+    public String showNewForm(Model model) {
+        model.addAttribute("chambre", new Chambre());
+        return "/Chambre/add";
+    }
+
+    @PostMapping("/chambre/save")
+    public String saveChambre(Chambre chambre, RedirectAttributes ra) {
+        chambreService.save(chambre);
+        ra.addFlashAttribute("message", "The user has been saved successfully.");
+        return "redirect:/chambre";
+    }
+
+
+    @GetMapping("/chambre/edit/{id}")
+    public String showEditForm(@PathVariable("id") Long idChambre, Model model) {
+        Chambre chambre = chambreService.retrieveChambre(idChambre);
+        model.addAttribute("chambre", chambre);
+        model.addAttribute("pageTitle", "Edit chambre (ID: " + idChambre + ")");
+
+        return "/Chambre/edit";
+    }
+
+    // Handle the form submission for updating a Chambre
+    @PostMapping("/chambre/edit/{id}")
+    public String updateChambre(@PathVariable("id") Long idChambre, @ModelAttribute("chambre") Chambre chambre) {
+        chambre.setIdChambre(idChambre); // Ensure the correct ID is set
+        chambreService.save(chambre); // Assuming there's a save method that updates if the ID exists
+        return "redirect:/chambre"; // Redirect to the list or details page
+    }
+
+    @GetMapping("/chambre/delete/{chambre-id}")
+    public String deleteChambre(@PathVariable("chambre-id") Long idChambre) {
+        chambreService.removeChambre(idChambre);
+        return "redirect:/chambre";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // http://localhost:8089/tpfoyer/chambre/add-chambre
     @PostMapping("/add-chambre")

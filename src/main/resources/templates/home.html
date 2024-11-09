@@ -1,43 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Foyer Management</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Video Background */
+        .mainpage {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .mainpage video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: absolute;
+            top: 20px;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .logo{
+            color: #ff0000;
+            font-size: 35px;
+            padding-left: 20px;
+            float: left;
+            padding-top: 10px;
+            margin-top: 5px
+        }
+
+        .navbar .menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar .menu ul li {
+            margin: 0 20px;
+
+
+        }
+        .navbar .menu ul li a {
+            color: #ff0000;
+            font-size: 16px;
+        }
+
+    </style>
 </head>
 <body>
-
 <div class="mainpage">
     <video autoplay muted loop>
         <source src="https://pfe.esprit.tn/static/media/backgroundPFE.5da5b6c5.mp4" type="video/mp4">
     </video>
+
+    <!-- Navbar -->
     <div class="navbar">
         <div class="icon">
-            <h2 class="logo">Foyer</h2>
+            <h2 class="logo">Foyer <br><span>Management</span></h2>
         </div>
-
         <div class="menu">
             <ul>
-                <li><a th:href="@{/}">HOME</a></li>
+                <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/universite}">University</a></li>
                 <li><a th:href="@{/foyer}">Foyer</a></li>
                 <li><a th:href="@{/chambre}">Chambre</a></li>
                 <li><a th:href="@{/bloc}">Bloc</a></li>
-                <li><a th:href="@{/etudiant}">Student</a></li>
+                <li><a th:href="@{/etudiant}">Students</a></li>
                 <li><a th:href="@{/reservation}">Reservation</a></li>
             </ul>
         </div>
-
-
-
-    </div>
-    <div class="content">
-        <h1>Foyer <br><span>Management</span> <br></h1>
-        <p class="par">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt neque
-            expedita atque eveniet <br> quis nesciunt. Quos nulla vero consequuntur, fugit nemo ad delectus
-            <br> a quae totam ipsa illum minus laudantium?
-        </p>
     </div>
 </div>
-<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 </html>

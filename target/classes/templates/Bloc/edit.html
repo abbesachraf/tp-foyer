@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Edit Bloc</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 50%;
+            max-width: 600px;
+        }
+        h2 {
+            color: #343a40; /* Dark grey for better readability */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #007bff; /* Bootstrap blue */
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #495057;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+        .actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        input[type="submit"] {
+            background-color: #28a745; /* Green for update */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        input[type="submit"]:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Edit Bloc</h2>
+    <a th:href="@{/bloc}" class="back-link">&larr; Back to Bloc List</a>
+
+    <form th:action="@{'/bloc/edit/' + ${bloc.idBloc}}" th:object="${bloc}" method="post">
+        <div class="form-group">
+            <span class="label">ID:</span>
+            <span th:text="${bloc.idBloc}"></span>
+        </div>
+        <div class="form-group">
+            <label for="name" class="label">Name:</label>
+            <input type="text" id="name" th:field="*{nomBloc}" placeholder="Enter bloc name" />
+        </div>
+        <div class="form-group">
+            <label for="capacity" class="label">Capacity:</label>
+            <input type="text" id="capacity" th:field="*{capaciteBloc}" placeholder="Enter capacity" />
+        </div>
+        <div class="form-group">
+            <label for="foyerId" class="label">Foyer ID:</label>
+            <input type="text" id="foyerId" th:field="*{foyer.idFoyer}" placeholder="Enter foyer ID" />
+        </div>
+
+        <div class="actions">
+            <input type="submit" value="Update">
+        </div>
+    </form>
+</div>
+</body>
+</html>

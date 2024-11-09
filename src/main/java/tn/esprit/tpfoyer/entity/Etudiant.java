@@ -3,6 +3,7 @@ package tn.esprit.tpfoyer.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.Set;
@@ -25,6 +26,7 @@ public class Etudiant {
     String nomEtudiant;
     String prenomEtudiant;
     long cinEtudiant;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date dateNaissance;
 
     @ManyToMany(mappedBy = "etudiants")

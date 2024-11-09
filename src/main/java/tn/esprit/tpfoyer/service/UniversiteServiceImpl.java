@@ -34,4 +34,8 @@ public class UniversiteServiceImpl implements IUniversiteService {
         universiteRepository.deleteById(universiteId);
     }
 
+
+    public void save(Universite universite) {
+        universiteRepository.save(universite);
+    }
 }

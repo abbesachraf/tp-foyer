@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a Chambre</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <style>
+        /* Custom Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+        h2 {
+            color: #343a40; /* Dark grey for better readability */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            color: #495057;
+        }
+        .form-control {
+            border-color: #ced4da;
+            border-radius: 5px;
+        }
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .text-center button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create a Chambre</h2>
+    <form th:action="@{/chambre/save}" method="post" th:object="${chambre}">
+        <input type="hidden" th:field="*{idChambre}">
+
+        <!-- Room Number Field -->
+        <div class="form-group">
+            <label for="roomNumber">Room Number:</label>
+            <input type="text" th:field="*{numeroChambre}" id="roomNumber" class="form-control" placeholder="Enter room number" required minlength="1" maxlength="45" />
+        </div>
+
+        <!-- Room Type Field (Dropdown) -->
+        <div class="form-group">
+            <label for="type">Room Type:</label>
+            <select th:field="*{typeC}" id="type" class="form-control" required>
+                <option value="" disabled selected>Select room type</option>
+                <option th:value="SIMPLE">SIMPLE</option>
+                <option th:value="DOUBLE">DOUBLE</option>
+                <option th:value="TRIPLE">TRIPLE</option>
+            </select>
+        </div>
+
+        <!-- Bloc ID Field -->
+        <div class="form-group">
+            <label for="blocId">Bloc ID:</label>
+            <input type="number" th:field="*{bloc.idBloc}" id="blocId" class="form-control" placeholder="Enter bloc ID" required min="1" />
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary m-2">Save</button>
+            <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/chambre}]]";
+    }
+</script>
+
+</body>
+</html>

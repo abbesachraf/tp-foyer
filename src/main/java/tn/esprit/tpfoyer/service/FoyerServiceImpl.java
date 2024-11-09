@@ -30,4 +30,7 @@ public class FoyerServiceImpl implements IFoyerService {
         foyerRepository.deleteById(foyerId);
     }
 
+    public void save(Foyer foyer) {
+        foyerRepository.save(foyer);
+    }
 }

@@ -1,6 +1,7 @@
 package tn.esprit.tpfoyer.service;
 
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,11 @@ public class ChambreServiceImpl implements IChambreService {
         return chambreRepository.findAll();
     }
 
+    @Transactional
+    public Chambre retrieveChambre(Long idChambre) {
+
+        return chambreRepository.findById(idChambre).get();
+    }
     public Chambre addChambre(Chambre c) {
         Chambre chambre = chambreRepository.save(c);
         return chambre;
@@ -48,4 +54,9 @@ public class ChambreServiceImpl implements IChambreService {
         return chambreRepository.trouverChselonEt(cin);
     }
 
+
+    @Transactional
+    public void save(Chambre chambre) {
+       chambreRepository.save(chambre);
+    }
 }

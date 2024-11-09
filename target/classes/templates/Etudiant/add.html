@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create/Edit Etudiant</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h2 {
+            color: #343a40;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create new Etudiant</h2>
+    <form th:action="@{/etudiant/save}" method="post" th:object="${etudiant}">
+        <input type="hidden" th:field="*{idEtudiant}">
+
+        <!-- CIN Field -->
+        <div class="form-group">
+            <label for="cin">CIN:</label>
+            <input type="text" th:field="*{cinEtudiant}" id="cin" class="form-control" placeholder="Enter CIN" required minlength="8" maxlength="8"/>
+        </div>
+
+        <!-- First Name Field -->
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" th:field="*{nomEtudiant}" id="firstName" class="form-control" placeholder="Enter first name" required />
+        </div>
+
+        <!-- Last Name Field -->
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" th:field="*{prenomEtudiant}" id="lastName" class="form-control" placeholder="Enter last name" required />
+        </div>
+
+        <!-- Date of Birth Field -->
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" th:field="*{dateNaissance}" id="dob" class="form-control" required />
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary m-2">Save</button>
+            <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function cancelForm() {
+        window.location = "[[@{/etudiant}]]";
+    }
+</script>
+
+</body>
+</html>

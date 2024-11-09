@@ -17,4 +17,5 @@ public interface IReservationService {
     // Here we will add later methods calling keywords and methods calling JPQL
     public List<Reservation> trouverResSelonDateEtStatus(Date d, boolean b);
 
+    public void save(Reservation reservation);
 }
