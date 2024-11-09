@@ -37,7 +37,7 @@ public class ChambreRestController {
     @GetMapping("/chambre/add")
     public String showNewForm(Model model) {
         model.addAttribute("chambre", new Chambre());
-        return "/Chambre/add";
+        return "Chambre/add";
     }
 
     @PostMapping("/chambre/save")
@@ -54,7 +54,7 @@ public class ChambreRestController {
         model.addAttribute("chambre", chambre);
         model.addAttribute("pageTitle", "Edit chambre (ID: " + idChambre + ")");
 
-        return "/Chambre/edit";
+        return "Chambre/edit";
     }
 
     // Handle the form submission for updating a Chambre
