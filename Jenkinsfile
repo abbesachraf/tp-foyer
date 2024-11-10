@@ -27,6 +27,12 @@ pipeline {
         sh "mvn package"      
       }
     }
+      stage('Dependency Check') {
+        steps {
+          echo 'Running Dependency Check...'
+          sh 'dependency-check --scan . --format HTML --out target/dependency-check-report'
+      }
+    }
        stage('Sonarqube Analysis') {
          steps {
          withSonarQubeEnv('Sonarqube1') {
