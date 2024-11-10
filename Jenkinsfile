@@ -68,11 +68,7 @@ pipeline {
                 }
             }
         }
-       stage('trivy') {
-       steps {
-        sh "trivy image maryeeem/tp-foyer:latest "      
-      }
-    }
+ 
   
          stage('Docker Hub'){
             steps{
