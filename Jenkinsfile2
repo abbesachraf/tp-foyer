@@ -15,11 +15,6 @@ pipeline {
         sh "mvn clean"      
       }
     }
-    stage('IDE Plugins') {
-       steps {
-          echo 'DONE'
-        }
-     }
 
       stage('MVN Compile') {
        steps {
@@ -31,7 +26,12 @@ pipeline {
       steps {
         sh "mvn package"      
       }
-    }
+    } 
+    stage('IDE Plugins') {
+       steps {
+          echo 'DONE'
+        }
+     }
       
     stage('Dependency Check') {
       steps {
