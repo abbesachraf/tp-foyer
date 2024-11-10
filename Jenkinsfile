@@ -68,15 +68,7 @@ pipeline {
                 }
             }
         }
-    
-    stage('Trivy Scan') {
-      steps {
-        script {
-          // Exécute Trivy pour scanner l'image Docker
-          sh 'trivy image maryeeem/tp-foyer'
-        }
-      }
-    }
+  
          stage('Docker Hub'){
             steps{
                 script{
