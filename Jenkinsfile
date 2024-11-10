@@ -27,10 +27,13 @@ pipeline {
         sh "mvn package"      
       }
     }
-      stage('Dependency Check') {
-        steps {
-          echo 'Running Dependency Check...'
-          sh 'dependency-check --scan . --format HTML --out target/dependency-check-report'
+      
+    stage('Dependency Check') {
+      steps {
+        script {
+          dependencyCheck additionalArguments: '--scan . --format HTML --out target/dependency-check-report', 
+                          odcInstallation: 'DP-Check'
+        }
       }
     }
        stage('Sonarqube Analysis') {
