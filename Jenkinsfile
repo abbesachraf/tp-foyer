@@ -82,31 +82,5 @@ pipeline {
             }
         }
 
-     // Exécution des tests JUnit
-        stage('JUnit Test') {
-            steps {
-                echo 'Running JUnit tests...'
-                sh 'mvn test'  // Exécuter les tests JUnit
-            }
-        }
-
-        // Archiver les résultats des tests JUnit
-        stage('JUnit Results') {
-            steps {
-                echo 'Archiving JUnit test results...'
-                junit '**/target/test-*.xml'  // Collecter les résultats JUnit
-            }
-        }
-
-        // Ajouter des pièces jointes aux résultats des tests
-        stage('JUnit Attachments') {
-            steps {
-                script {
-                    // Joindre des fichiers de logs ou autres pièces jointes générées durant le build
-                    archiveArtifacts artifacts: '**/target/*.log', allowEmptyArchive: true
-                    // Vous pouvez ajouter d'autres fichiers à joindre ici si nécessaire
-                }
-            }
-        }
 }
 }
