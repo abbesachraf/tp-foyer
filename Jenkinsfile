@@ -27,6 +27,12 @@ pipeline {
         sh "mvn package"      
       }
     }
+     stage('JUnit Test') {
+            steps {
+                // Exécuter les tests JUnit avec Maven
+                sh "mvn test"
+            }
+        }
       
     stage('Dependency Check') {
       steps {
@@ -83,4 +89,16 @@ pipeline {
         }
 
 }
+   post {
+    always {
+      // Archivage des résultats des tests JUnit
+      junit '**/target/test-*.xml' // Remarque : Vérifiez le chemin du fichier XML des tests selon votre configuration Maven
+    }
+    success {
+      echo 'Les tests sont réussis.'
+    }
+    failure {
+      echo 'Certains tests ont échoué.'
+    }
+  }
 }
