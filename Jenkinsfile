@@ -27,6 +27,13 @@ pipeline {
         sh "mvn package"      
       }
     }
+
+    stage('Unit Tests') {
+            steps {
+                echo 'Exécution des tests...'
+                sh 'mvn test'
+            }
+        }
       
     stage('Dependency Check') {
       steps {
