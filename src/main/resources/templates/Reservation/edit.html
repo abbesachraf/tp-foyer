@@ -1,10 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 50%;
+            max-width: 600px;
+        }
+        h2 {
+            color: #343a40; /* Dark grey for better readability */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #007bff; /* Bootstrap blue */
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+        input[type="text"], input[type="number"], input[type="date"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #495057;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, textarea:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+        .actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        input[type="submit"] {
+            background-color: #28a745; /* Green for update */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        input[type="submit"]:active {
+            transform: scale(0.98);
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <h2>Edit Reservation</h2>
+    <a th:href="@{/reservation}" class="back-link">&larr; Back to Reservation List</a>
 
+    <form th:action="@{'/reservation/edit/' + ${reservation.idReservation}}" th:object="${reservation}" method="post">
+        <div class="form-group">
+            <label class="label">ID:</label>
+            <span th:text="${reservation.idReservation}"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Academic Year:</label>
+            <input type="text" th:field="*{anneeUniversitaire}" placeholder="Enter Academic Year" required />
+        </div>
+
+        <div class="form-group">
+            <label class="label">Is Valid:</label>
+            <input type="checkbox" th:field="*{estValide}" />
+            <label for="estValide">Valid</label>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Students:</label>
+            <input type="text" th:field="*{etudiants}" placeholder="Enter Students (comma-separated)" />
+        </div>
+
+        <div class="actions">
+            <input type="submit" value="Update">
+        </div>
+    </form>
+</div>
 </body>
 </html>

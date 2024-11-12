@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Reservation</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h2 {
+            color: #343a40;
+            text-align: center;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create New Reservation</h2>
+    <form th:action="@{/reservation/save}" method="post" th:object="${reservation}">
+
+        <!-- ID Reservation Field (Manual Input) -->
+        <div class="form-group">
+            <label for="idReservation">Reservation ID:</label>
+            <input type="text" th:field="*{idReservation}" id="idReservation" class="form-control" placeholder="Enter reservation ID" required />
+        </div>
+
+        <!-- Academic Year Field -->
+        <div class="form-group">
+            <label for="anneeUniversitaire">Academic Year:</label>
+            <input type="date" th:field="*{anneeUniversitaire}" id="anneeUniversitaire" class="form-control" placeholder="Select academic year" required />
+        </div>
+
+        <!-- Is Valid Field -->
+        <div class="form-group">
+            <label for="estValide">Is Valid:</label>
+            <select th:field="*{estValide}" id="estValide" class="form-control" required>
+                <option value="true">Valid</option>
+                <option value="false">Invalid</option>
+            </select>
+        </div>
+
+        <!-- Students Field (for Many-to-Many) -->
+        <div class="form-group">
+            <label for="etudiants">Students:</label>
+            <select th:field="*{etudiants}" id="etudiants" class="form-control" multiple>
+                <option th:each="etudiant : ${etudiantsList}" th:value="${etudiant.idEtudiant}" th:text="${etudiant.nomEtudiant}"></option>
+            </select>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary m-2">Save</button>
+            <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function cancelForm() {
+        window.location = "[[@{/reservation}]]";  // Redirects to the reservation list page
+    }
+</script>
+
+</body>
+</html>

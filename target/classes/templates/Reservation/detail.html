@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 50%;
+            max-width: 600px;
+            text-align: left;
+        }
+        h2 {
+            color: #343a40; /* Dark grey for better readability */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #007bff; /* Bootstrap blue color */
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details div {
+            margin-bottom: 10px;
+        }
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 120px;
+            color: #495057; /* Slightly darker grey */
+        }
+        .value {
+            color: #212529;
+        }
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .actions a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .edit-btn {
+            background-color: #28a745; /* Green for edit */
+            color: white;
+        }
+        .edit-btn:hover {
+            background-color: #218838;
+        }
+        .delete-btn {
+            background-color: #dc3545; /* Red for delete */
+            color: white;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>View Reservation</h2>
+    <a th:href="@{/reservation}" class="back-link">&larr; Back to Reservation List</a>
+    <div class="details">
+        <div>
+            <span class="label">ID:</span>
+            <span th:text="${reservation.idReservation}"></span>
+        </div>
+        <div>
+            <span class="label">Academic Year:</span>
+            <span th:text="${reservation.anneeUniversitaire}"></span>
+        </div>
+        <div>
+            <span class="label">Is Valid:</span>
+            <span th:text="${reservation.estValide ? 'Valid' : 'Invalid'}"></span>
+        </div>
+        <div>
+            <span class="label">Students:</span>
+            <span th:each="etudiant : ${reservation.etudiants}" th:text="${etudiant.nomEtudiant}"> </span>
+        </div>
+    </div>
+    <div class="actions">
+        <a th:href="@{'/reservation/edit/' + ${reservation.idReservation}}" class="edit-btn">Edit</a>
+        <a th:href="@{'/reservation/delete/' + ${reservation.idReservation}}"
+           th:onclick="|return confirm('Are you sure you want to delete Reservation ID ' + ${reservation.idReservation} + '?');|"
+           class="delete-btn">Delete</a>
+    </div>
+</div>
+</body>
+</html>

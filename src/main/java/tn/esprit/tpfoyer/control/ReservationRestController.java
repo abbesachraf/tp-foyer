@@ -92,9 +92,6 @@ public class ReservationRestController {
 
 
 
-
-
-
     // http://localhost:8089/tpfoyer/reservation/retrieve-all-reservations
     @GetMapping("/retrieve-all-reservations")
     public List<Reservation> getReservations() {
